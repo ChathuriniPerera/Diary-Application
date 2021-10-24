@@ -1,0 +1,3 @@
+function createDiary() {
+    alert("recordupdated")
+}

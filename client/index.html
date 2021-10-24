@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>JSD Practical</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="../client/myjs/createnote.js"></script> -->
+    <!-- <script>
+        function createDiary(){
+            alert("recordupdated")
+        }
+    </script> -->
+    <script>
+        function createDiary() {
+            const title = document.getElementById("createTitle").value;
+            const description = document.getElementById("createDescription").value;
+            axios
+                .post("http://localhost:8084/create-newnote", {
+                    "title": title,
+                    "description": description
+                })
+                .then(Response => {
+                    alert("successfull create note");
+                })
+                .catch(error => {
+                    alert("Not Successfull..");
+                });
+        };
+    </script>
+    <script>
+        function updateDiary() {
+            const title = document.getElementById("updateTitle").value;
+            const description = document.getElementById("updateDescription").value;
+            axios
+                .post("http://localhost:8084/update-newnote", {
+                    "title": title,
+                    "description": description
+                })
+                .then(Response => {
+                    alert("successfull update note");
+                })
+                .catch(error => {
+                    alert("Not Successfull..");
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="">
+        <button type="button" class="btn btn-outline-secondary" style="margin-left: 80%;" data-toggle="modal"
+            data-target="#addnote">Create New Note</button>
+    </div>
+    <div>
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <hr>
+            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit
+                longer
+                so that you can see how spacing within an alert works with this kind of content.</p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-outline-success" style="margin-left: 80%;" data-toggle="modal"
+                data-target="#updatenote">Update Note</button>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deletenote">Delete
+                Note</button>
+        </div>
+    </div>
+
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="addnote" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">CREATE NEW NOTE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" id="createTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea class="form-control" id="createDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" onclick="createDiary()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="updatenote" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">UPDATE NOTE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" id="updateTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea class="form-control" id="updateDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" onclick="updateDiary()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="deletenote" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">DELETE NOTE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="color: brown;">Are You Sure You Want To Delete This.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger">DELETE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
